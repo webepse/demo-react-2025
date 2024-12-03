@@ -6,7 +6,7 @@ import Membre from './components/Membre';
 const league = {
   membre1: {
     nom: "Batman",
-    age: 48
+    age: 28
   },
   membre2: {
     nom: "Superman",
@@ -26,12 +26,14 @@ const league = {
 class App extends Component {
   state = { 
     league: league,
-    plus: 2
+    plus: 2,
+    isShow: false
    } 
 
    componentDidMount()
    {
     console.log('montage')
+    this.setState({league})
    }
 
    componentDidUpdate()
@@ -42,6 +44,11 @@ class App extends Component {
    componentWillUnmount()
    {
     console.log('démontage')
+   }
+
+   handleShow = () => {
+    const isShow = !this.state.isShow
+    this.setState({isShow})
    }
 
   handleClick = (nb) => {
@@ -72,6 +79,19 @@ class App extends Component {
           veillir = {() => this.handleClick(this.state.plus)} 
           plus={this.state.plus}
         />
+        <Membre 
+          age="50"
+          nom="Jordan"
+        >
+          {
+            this.state.isShow ? <strong>Je suis le GOAT</strong> : null
+          }
+
+          <button onClick={this.handleShow}>
+            {this.state.isShow ? 'Cacher' : 'Montrer'}
+          </button>
+        
+        </Membre>
       </>
     );
     // return React.createElement('div',{className: 'app'}, React.createElement('h1',null,'Hello world'))
