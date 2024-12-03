@@ -100,10 +100,7 @@ class App extends Component {
       <>
         <h1>Hello World!</h1>
         {list}
-        <Button
-          veillir = {() => this.handleClick(this.state.plus)} 
-          plus={this.state.plus}
-        />
+       
        
       </>
     );
