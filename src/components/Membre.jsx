@@ -1,6 +1,6 @@
 import Affichage from "./Affichage";
 
-const Membre = ({nom, age, children, handleChange}) => {
+const Membre = ({nom, age, children, handleChange, hideName, handleClick, plus}) => {
     // const nom = props.nom
     // const children = props.children
     //const {nom, age, children} = props
@@ -11,7 +11,9 @@ const Membre = ({nom, age, children, handleChange}) => {
                 age={age}
             />
             <input type="text" value={nom} onChange={handleChange}/>
-            <button>X</button>
+            <button onClick={hideName}>X</button>
+            <br />
+            <button onClick={handleClick}>Veillir +{plus}</button>
             <p>{ children ? <p>{children}</p> : null}</p>
         </>
      );

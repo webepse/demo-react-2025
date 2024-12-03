@@ -51,9 +51,9 @@ class App extends Component {
     this.setState({isShow})
    }
 
-  handleClick = (nb) => {
+  handleClick = (id, nb) => {
     const league = {...this.state.league}
-    league.membre1.age +=nb
+    league[id].age +=nb
     //this.setState({league: league})
     this.setState({league})
   }
@@ -67,6 +67,13 @@ class App extends Component {
     this.setState({league:league})
   }
 
+  hideName = (id) => {
+    const league = {...this.state.league}
+    league[id].nom = "X"
+    league[id].age = 0
+    this.setState({league:league})
+  }
+
   render() { 
 
     const list = Object.keys(this.state.league).map(iteration => {
@@ -76,6 +83,9 @@ class App extends Component {
           age={this.state.league[iteration].age} 
           nom={this.state.league[iteration].nom}
           handleChange={(event)=> {this.handleChange(event, iteration)}} 
+          hideName={() => {this.hideName(iteration)} }
+          plus = {this.state.plus}
+          handleClick = {() => {this.handleClick(iteration, this.state.plus)}}
           />
       )
     })
@@ -94,19 +104,7 @@ class App extends Component {
           veillir = {() => this.handleClick(this.state.plus)} 
           plus={this.state.plus}
         />
-        <Membre 
-          age="50"
-          nom="Jordan"
-        >
-          {
-            this.state.isShow ? <strong>Je suis le GOAT</strong> : null
-          }
-
-          <button onClick={this.handleShow}>
-            {this.state.isShow ? 'Cacher' : 'Montrer'}
-          </button>
-        
-        </Membre>
+       
       </>
     );
     // return React.createElement('div',{className: 'app'}, React.createElement('h1',null,'Hello world'))
