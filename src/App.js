@@ -56,12 +56,27 @@ class App extends Component {
     league.membre1.age +=nb
     //this.setState({league: league})
     this.setState({league})
-  } 
+  }
+  
+  handleChange = (event, id) => {
+    console.log(id)
+    console.log(event)
+    const league = {...this.state.league}
+    const nom = event.target.value
+    league[id].nom = nom
+    this.setState({league:league})
+  }
+
   render() { 
 
     const list = Object.keys(this.state.league).map(iteration => {
       return (
-        <Membre key={iteration} age={this.state.league[iteration].age} nom={this.state.league[iteration].nom} />
+        <Membre 
+          key={iteration} 
+          age={this.state.league[iteration].age} 
+          nom={this.state.league[iteration].nom}
+          handleChange={(event)=> {this.handleChange(event, iteration)}} 
+          />
       )
     })
     // [membre1,membre2,membre3,membre4]
